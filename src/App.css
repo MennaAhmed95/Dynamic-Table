@@ -46,9 +46,12 @@ border-radius: .2rem;
 }
 
 button{
-margin-left: 1%;
-width: 4rem;
+margin-left: 2.5%;
+width: 2rem;
 background-color:white;
 border: 1px solid gainsboro;
 border-radius: .2rem;
+}
+.btnContainer{
+  margin-top: 1rem; display: flex; flex-direction: column;
 }

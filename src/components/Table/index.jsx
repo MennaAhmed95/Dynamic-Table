@@ -58,22 +58,27 @@ const MyTable = ({ row, col }) => {
         break;
     }
   };
-
   return (
     <center>
-      <div style={{ marginTop: "1rem" }}>
-        <button name="left" onClick={handleBtn}>
-          Left
-        </button>
-        <button name="up" onClick={handleBtn}>
-          Up
-        </button>
-        <button name="right" onClick={handleBtn}>
-          Right
-        </button>
-        <button name="down" onClick={handleBtn}>
-          Down
-        </button>
+      <div className="btnContainer">
+        <div>
+          <button name="up" onClick={handleBtn}>
+            &uarr;
+          </button>
+        </div>
+        <div>
+          <button name="left" onClick={handleBtn}>
+            &larr;
+          </button>
+          <button name="right" onClick={handleBtn}>
+            &rarr;
+          </button>
+        </div>
+        <div>
+          <button name="down" onClick={handleBtn}>
+            &darr;
+          </button>
+        </div>
       </div>
       <TableContainer component={Paper} className={classes.tableCont}>
         <Table className={classes.table} aria-label="simple table">
