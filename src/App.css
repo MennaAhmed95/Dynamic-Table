@@ -40,3 +40,15 @@ background-color: white;
 border: 1px solid gainsboro;
 border-radius: .2rem;
 }
+
+.selected{
+  background-color: #61dafb;
+}
+
+button{
+margin-left: 1%;
+width: 4rem;
+background-color:white;
+border: 1px solid gainsboro;
+border-radius: .2rem;
+}

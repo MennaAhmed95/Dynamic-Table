@@ -2,18 +2,16 @@ import "./App.css";
 import Input from "./components/InputField";
 import MyTable from "./components/Table";
 import React, { useState } from "react";
+
 function App() {
   const [row, setRow] = useState("");
   const [col, setCol] = useState("");
   let [flag, setFlag] = useState(false);
   const handleChange = (e) => {
     e.target.name === "r" ? setRow(e.target.value) : setCol(e.target.value);
-    console.log(row, "row");
-    console.log(col, "col");
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(row, col);
     flag = true;
     setFlag(flag);
   };

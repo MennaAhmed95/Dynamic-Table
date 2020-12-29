@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Table,
   TableBody,
   TableCell,
   TableContainer,
-  // TableHead,
   TableRow,
   Paper,
 } from "@material-ui/core";
@@ -16,7 +15,7 @@ const useStyles = makeStyles({
   },
   tableCont: {
     maxWidth: 600,
-    marginTop: 50,
+    marginTop: 40,
   },
   tableCell: {
     border: "1px solid gainsboro",
@@ -24,24 +23,71 @@ const useStyles = makeStyles({
 });
 
 const MyTable = ({ row, col }) => {
-  console.log(row, col, "::");
-  let rows = new Array(parseInt(row)).fill(" ");
-  let cols = new Array(parseInt(col)).fill(" ");
-  console.log("::", rows, cols, typeof rows);
+  const noRow = parseInt(row);
+  const noCol = parseInt(col);
+  const matrix = new Array(noRow).fill(0).map(() => new Array(noCol).fill(0));
+  let [currentRow, setCurrentRow] = useState(0);
+  let [currentCol, setCurrentCol] = useState(0);
+  const [currentCell, setCurrentCell] = useState(
+    matrix[currentRow][currentCol]
+  );
   const classes = useStyles();
+  const handleBtn = (e) => {
+    switch (e.target.name) {
+      case "left":
+        if (currentCol > 0) currentCol = currentCol - 1;
+        setCurrentCol(currentCol);
+        setCurrentCell(matrix[currentRow][currentCol]);
+        break;
+      case "up":
+        if (currentRow > 0) currentRow = currentRow - 1;
+        setCurrentRow(currentRow);
+        setCurrentCell(matrix[currentRow][currentCol]);
+        break;
+      case "right":
+        if (currentCol < noCol - 1) currentCol = currentCol + 1;
+        setCurrentCol(currentCol);
+        setCurrentCell(matrix[currentRow][currentCol]);
+        break;
+      case "down":
+        if (currentRow < noRow - 1) currentRow = currentRow + 1;
+        setCurrentRow(currentRow);
+        setCurrentCell(matrix[currentRow][currentCol]);
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <center>
+      <div style={{ marginTop: "1rem" }}>
+        <button name="left" onClick={handleBtn}>
+          Left
+        </button>
+        <button name="up" onClick={handleBtn}>
+          Up
+        </button>
+        <button name="right" onClick={handleBtn}>
+          Right
+        </button>
+        <button name="down" onClick={handleBtn}>
+          Down
+        </button>
+      </div>
       <TableContainer component={Paper} className={classes.tableCont}>
         <Table className={classes.table} aria-label="simple table">
           <TableBody>
-            {rows.map((row, i) => (
+            {matrix.map((row, i) => (
               <TableRow key={i}>
-                {cols.map((col, i) => (
+                {row.map((col, j) => (
                   <TableCell
                     component="th"
                     scope="row"
-                    key={i}
-                    className={classes.tableCell}
+                    key={j}
+                    className={`${classes.tableCell} ${
+                      i === currentRow && j === currentCol ? "selected" : ""
+                    }`}
                   ></TableCell>
                 ))}
               </TableRow>
